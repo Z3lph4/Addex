@@ -1,9 +1,13 @@
 <?php
-
+// Incluir o arquivo de configuração do banco de dados
 include 'config.php';
 
+// Iniciar a sessão (se necessário)
 session_start();
 
+// Consulta SQL para selecionar todos os dados da tabela clientes
+$sql = "SELECT nome_cliente, nif, email, morada FROM clientes";
+$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +17,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Addex</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/clientes.css">
 </head>
 
 <body>
@@ -92,66 +96,49 @@ session_start();
             <!-- Order Details List -->
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Recent Orders</h2>
+                    <h2>Clientes</h2>
                     <!-- <a href="#" class="btn">View All</a> -->
+                    <!-- Adicionar, Eliminar e Editar Botões -->
+                    <div class="actions">
+                        <a href="#" class="btn">Adicionar</a>
+                        <a href="#" class="btn">Eliminar</a>
+                        <a href="#" class="btn">Editar</a>
+                    </div>
                 </div>
                 <table>
                     <thead>
                         <tr>
-                            <td>Name</td>
-                            <td>Price</td>
-                            <td>Payment</td>
-                            <td>Status</td>
+                            <td>Nome</td>
+                            <td>NIF</td>
+                            <td>Email</td>
+                            <td>Morada</td>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr>
-                            <td>Star Refrigerator</td>
-                            <td>1200€</td>
-                            <td>Paid</td>
-                            <td><span class="status delivered">Delivered</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Star Refrigerator</td>
-                            <td>1200€</td>
-                            <td>Paid</td>
-                            <td><span class="status return">Return</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Star Refrigerator</td>
-                            <td>1200€</td>
-                            <td>Due</td>
-                            <td><span class="status inprogress">In Progress</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Star Refrigerator</td>
-                            <td>1200€</td>
-                            <td>Due</td>
-                            <td><span class="status pending">Pending</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Star Refrigerator</td>
-                            <td>1200€</td>
-                            <td>Paid</td>
-                            <td><span class="status delivered">Delivered</span></td>
-                        </tr>
-
+                        <?php
+                        // Verificar se há dados retornados pela consulta
+                        if (mysqli_num_rows($result) > 0) {
+                            // Loop através dos dados retornados e exibir em linhas da tabela
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<tr>';
+                                echo '<td>' . $row['nome_cliente'] . '</td>';
+                                echo '<td>' . $row['nif'] . '</td>';
+                                echo '<td>' . $row['email'] . '</td>';
+                                echo '<td>' . $row['morada'] . '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            // Se não houver dados na tabela clientes, exibir uma mensagem
+                            echo '<tr><td colspan="4">Nenhum cliente encontrado.</td></tr>';
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
-
-            
-
         </div>
 
         </div>
     </div>
-
 
     <!-- //// ICONS - IonIcons \\\\ -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -159,6 +146,12 @@ session_start();
 
     <!-- //// JavaScript \\\\ -->
     <script src="js/main.js"></script>
+    <script src="js/clientes.js"></script>
 
 </body>
 </html>
+
+<?php
+// Fechar a conexão com o banco de dados
+mysqli_close($conn);
+?>
