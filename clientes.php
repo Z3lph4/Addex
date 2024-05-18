@@ -17,6 +17,7 @@ $result = mysqli_query($conn, $sql);
     <title>Addex</title>
 
     <link rel="stylesheet" href="css/clientes.css">
+
 </head>
 
 <body>
@@ -90,7 +91,7 @@ $result = mysqli_query($conn, $sql);
                 <div class="cardHeader">
                     <h2>Clientes</h2>
                     <div class="actions">
-                        <a href="#" class="btn">Adicionar</a>
+                        <button id="addBtn" class="btn">Adicionar</button>
                     </div>
                 </div>
                 <table>
@@ -129,6 +130,24 @@ $result = mysqli_query($conn, $sql);
                 </table>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Popup Modal -->
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="addForm" method="post" action="Aclientes.php">
+            <label for="nome_cliente">Nome:</label>
+            <input type="text" id="nome_cliente" name="nome_cliente" required><br>
+            <label for="nif">NIF:</label>
+            <input type="text" id="nif" name="nif" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="morada">Morada:</label>
+            <input type="text" id="morada" name="morada" required><br>
+            <button type="submit">Adicionar</button>
+        </form>
     </div>
 </div>
 
