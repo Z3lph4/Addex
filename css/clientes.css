@@ -525,6 +525,7 @@ body {
     border: 1px solid #888;
     width: 80%;
     max-width: 500px;
+    border-radius: 10px; /* Bordas arredondadas */
 }
 .close {
     color: #aaa;
@@ -538,6 +539,31 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+.form-group {
+    margin-bottom: 15px; /* Espaçamento entre os campos */
+}
+.form-group label {
+    display: block;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Bordas arredondadas */
+    box-sizing: border-box;
+}
+.form-group button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.form-group button:hover {
+    background-color: #45a049;
+}
+
 
 
 

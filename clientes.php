@@ -138,15 +138,25 @@ $result = mysqli_query($conn, $sql);
     <div class="modal-content">
         <span class="close">&times;</span>
         <form id="addForm" method="post" action="Aclientes.php">
-            <label for="nome_cliente">Nome:</label>
-            <input type="text" id="nome_cliente" name="nome_cliente" required><br>
-            <label for="nif">NIF:</label>
-            <input type="text" id="nif" name="nif" required><br>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
-            <label for="morada">Morada:</label>
-            <input type="text" id="morada" name="morada" required><br>
-            <button type="submit">Adicionar</button>
+            <div class="form-group">
+                <label for="nome_cliente">Nome</label>
+                <input type="text" id="nome_cliente" name="nome_cliente" required>
+            </div>
+            <div class="form-group">
+                <label for="nif">NIF</label>
+                <input type="text" id="nif" name="nif" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="morada">Morada</label>
+                <input type="text" id="morada" name="morada" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Adicionar</button>
+            </div>
         </form>
     </div>
 </div>
