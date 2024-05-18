@@ -2,11 +2,10 @@
 // Incluir o arquivo de configuração do banco de dados
 include 'config.php';
 
-// Iniciar a sessão (se necessário)
 session_start();
 
 // Consulta SQL para selecionar todos os dados da tabela clientes
-$sql = "SELECT nome_cliente, nif, email, morada FROM clientes";
+$sql = "SELECT id_cliente, nome_cliente, nif, email, morada FROM clientes";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -23,16 +22,14 @@ $result = mysqli_query($conn, $sql);
 <body>
 
 <div class="container">
-        <div class="navigation">
-          <ul>
-
+    <div class="navigation">
+        <ul>
             <li>
                 <a href="index.php">
                     <span class="icon"><ion-icon name="logo-angular"></ion-icon></span>
                     <span class="title">Addex</span>
                 </a>
             </li>
-
             <li>
                 <a href="index.php">
                     <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
@@ -69,40 +66,31 @@ $result = mysqli_query($conn, $sql);
                     <span class="title">Planeamento</span>
                 </a>
             </li>
+        </ul>  
+    </div>
 
-          </ul>  
-        </div>
-
-        <!-- //// MAIN \\\\ -->
-        <div class="main">
-            <div class="topbar">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
-                <!-- Seach -->
-                <div class="search">
-                    <label for="">
-                        <input type="text" placeholder="Search here">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
-                <!-- UserImg -->
-                <!-- <div class="user">
-                    <img src="./img/user.jpg" alt="">
-                </div> -->
+    <!-- //// MAIN \\\\ -->
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
             </div>
+            <!-- Seach -->
+            <div class="search">
+                <label for="">
+                    <input type="text" placeholder="Search here">
+                    <ion-icon name="search-outline"></ion-icon>
+                </label>
+            </div>
+        </div>
 
         <div class="details">
             <!-- Order Details List -->
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Clientes</h2>
-                    <!-- <a href="#" class="btn">View All</a> -->
-                    <!-- Adicionar, Eliminar e Editar Botões -->
                     <div class="actions">
                         <a href="#" class="btn">Adicionar</a>
-                        <a href="#" class="btn">Eliminar</a>
-                        <a href="#" class="btn">Editar</a>
                     </div>
                 </div>
                 <table>
@@ -112,46 +100,49 @@ $result = mysqli_query($conn, $sql);
                             <td>NIF</td>
                             <td>Email</td>
                             <td>Morada</td>
+                            <td>Ações</td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        // Verificar se há dados retornados pela consulta
                         if (mysqli_num_rows($result) > 0) {
-                            // Loop através dos dados retornados e exibir em linhas da tabela
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<tr>';
                                 echo '<td>' . $row['nome_cliente'] . '</td>';
                                 echo '<td>' . $row['nif'] . '</td>';
                                 echo '<td>' . $row['email'] . '</td>';
                                 echo '<td>' . $row['morada'] . '</td>';
+                                echo '<td>';
+                                echo '<form method="post" action="Dclientes.php" class="delete-form" style="display:inline;">';
+                                echo '<input type="hidden" name="id_cliente" value="' . $row['id_cliente'] . '">';
+                                echo '<button type="submit" class="delete-btn" style="background-color:red;color:white;border:none;padding:5px;">X</button>';
+                                echo '</form>';
+                                echo '<button class="edit-btn" style="padding-left: 15px; background-color: yellow; border: none;"><ion-icon name="create-outline"></ion-icon></button>';
+                                echo '</td>';
                                 echo '</tr>';
-                            }
+                            }                            
                         } else {
-                            // Se não houver dados na tabela clientes, exibir uma mensagem
-                            echo '<tr><td colspan="4">Nenhum cliente encontrado.</td></tr>';
+                            echo '<tr><td colspan="5">Nenhum cliente encontrado.</td></tr>';
                         }
                         ?>
                     </tbody>
                 </table>
             </div>
         </div>
-
-        </div>
     </div>
+</div>
 
-    <!-- //// ICONS - IonIcons \\\\ -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-- //// ICONS - IonIcons \\\\ -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-    <!-- //// JavaScript \\\\ -->
-    <script src="js/main.js"></script>
-    <script src="js/clientes.js"></script>
+<!-- //// JavaScript \\\\ -->
+<script src="js/main.js"></script>
+<script src="js/clientes.js"></script>
 
 </body>
 </html>
 
 <?php
-// Fechar a conexão com o banco de dados
 mysqli_close($conn);
 ?>

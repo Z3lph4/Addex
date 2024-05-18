@@ -328,12 +328,18 @@ body {
 }
 
 .details .recentOrders table tbody tr:hover {
-    background: var(--blue);
+    background: #1795ce;
     color: var(--white);
 }
 
 .details .recentOrders table tr td {
+    /* padding: 10px; */
+    text-align: center;
+}
+
+.details .recentOrders table tr td:first-child {
     padding: 10px;
+    text-align: start;
 }
 
 .details .recentOrders table tr td:last-child {
@@ -459,6 +465,50 @@ body {
 .actions .btn:hover {
     background-color: #1c6de0;
 }
+
+.delete-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: red;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
+.edit-btn {
+    background-color: #ffc414;
+}
+
+.edit-btn:hover {
+    background-color: darkgoldenrod;
+}
+
+/* Adicionar margem entre os botões */
+.edit-btn {
+    margin-left: 10px;
+}
+
+
+
+
 
 
 /* Responsive desing */
